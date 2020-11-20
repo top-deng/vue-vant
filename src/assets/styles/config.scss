@@ -1,0 +1,51 @@
+/* vw表示1%的屏幕宽度,而我们的设计稿通常是750px的,屏幕一共是100vw,对应750px,那么1px就是0.1333333vw, 为了方便计算,我们放大100倍,同时我们知道另一个单位rem,
+rem是相对html元素,为了方便计算,我们取html是100px,通过上面的计算结果1px是0.13333333vw,那么100px就是13.333333vw了.这样后面的用rem就很好计算了,
+这样就得到13.3333333vw对应100px(750px的 设计稿),然后我们就可以很愉快的写rem单位了, 由于倍率是100,我们也不需要啥计算插件之类的了,除以100,
+直接小数点向左移动2位,1rem是100px,那么10px就是0.1rem,1px就是0.01rem
+ */
+@charset "utf-8";
+// 设计稿是1920
+$vw_design: 1920;
+
+@function toVw($design) {
+	@return (100 / $design) * 100 * 1vw;
+}
+
+/* PC端适配低分辨率 */
+@media (max-width:1500px) {
+  html {
+    font-size: 80px;
+  }
+
+}
+
+/* PC端适配正常屏幕 */
+@media only screen and (min-width: 1500px) and (max-width: 1920px){ 
+  html {
+    font-size: toVw($vw_design);
+  }
+}
+
+/* PC端适配大屏 */
+@media only screen and (min-width: 1920px) and (max-width: 3840px){ 
+  html {
+    font-size: 100px;
+  }
+}
+
+
+/* 为了方便计算,我们放大100倍,同时我们知道另一个单位rem,
+rem是相对html元素,为了方便计算,我们取html是100px(既1rem = 100px) */
+@function vw($px) {
+	@return ($px / 100) * 1rem;
+}
+
+// 按钮 文本输入的大小控制
+@function tRem($px) {
+	@return $px * 1px;
+}
+
+//纯vw
+@function setVw($px) {
+	@return ($px / $vw_design) * 100vw;
+}

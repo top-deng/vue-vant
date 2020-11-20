@@ -1,0 +1,32 @@
+@import './variables.scss';
+@import './mixin.scss';
+
+.dialogForm {
+  .el-form {
+    padding: 0 !important;
+  }
+  .el-select,
+  .el-input,
+  .el-textarea,
+  .textarea {
+    min-width: vw(320);
+  }
+
+  .selectItem {
+    float: left;
+    @include clearfix;
+
+    .el-input {
+      width: vw(150);
+    }
+  }
+
+  .selectItem.second {
+    padding-left: vw(20);
+  }
+  .uploadTip {
+    margin-left: vw(20);
+    font-size: tRem(12);
+    color: $color-646466;
+  }
+}

@@ -1,0 +1,88 @@
+@charset "utf-8";
+@import './config.scss';
+@import './variables.scss';
+@import './mixin.scss';
+
+%date-format-change-btn {
+  margin-right: vw(50);
+  text-align: right;
+  .tabsDate{
+    @include inline-block;
+    margin-right: vw(20);
+  }
+  .date{
+    @include inline-block;
+    .el-button {
+      height: vw(32);
+      line-height: vw(32);
+      padding: 0 vw(20);
+    }
+  }
+}
+
+%isOnline {
+  .online {
+    color: $success-color;
+  }
+  .offline {
+    color: $color-969799;
+  }
+}
+
+%table-el-checkbox {
+  .el-checkbox__input.is-indeterminate {
+    .el-checkbox__inner {
+      background-color: $button-primary-color;
+      border-color: $button-primary-color;
+      &:before {
+        background: $bg-color;
+      }
+    }
+  }
+}
+
+%el-tree-node__expand-icon-isLeaf {
+  .el-tree-node__expand-icon.is-leaf {
+    padding: 0;
+    width: 0;
+  }
+}
+
+%el-table-border {
+  .el-table td, .el-table th.is-leaf {
+    border-bottom: 1px solid $border-color; 
+  }
+  .el-table__body tr, .el-table__row td, .el-table thead tr {
+    background: none; 
+    border-bottom: 1px solid $border-color; 
+    border-right: 1px solid $border-color; 
+  }
+}
+
+%el-textarea-count {
+  .el-textarea .el-input__count {
+    line-height: 1.4;
+  }
+  .el-input__count .el-input__count-inner {
+    background: none;
+  }
+}
+
+%el-checkbox-border {
+  .el-checkbox {
+    margin: 0;
+  }
+  .el-checkbox.is-bordered+.el-checkbox.is-bordered {
+    margin-left: vw(16);
+  }
+  .el-checkbox.is-bordered.el-checkbox--medium {
+    background: $bg-color;
+  }
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: $button-primary-color;
+    border-color: $button-primary-color;
+  }
+  .el-checkbox.is-bordered.is-checked {
+    border-color: $button-primary-color;
+  }
+}

@@ -1,0 +1,97 @@
+// base color
+$blue: #324157;
+$light-blue: #3A71A8;
+$red: #C03639;
+$pink: #E65D6E;
+$green: #30B08F;
+$tiffany: #4AB7BD;
+$yellow: #FEC171;
+$panGreen: #30B08F;
+// sidebar
+$menuText: #313233;
+$menuActiveText: #4c84ff;
+$subMenuActiveText: #4c84ff;
+$subMenuHover: #eff4ff;
+$sideBarWidth: vw(220);
+$navBarHeight: vw(50);
+$base-gutter-height: vw(90);
+$sub-gutter-height: vw(104);
+$menuBg: #fff;
+$subMenuBg: #fff;
+$menuHover: #eff4ff;
+$bg-color: #fff;
+$base-bg-clolr: #f2f4f7;
+$border-color: #e1e2e5;
+$secondary-border-color: #e1e2e6;
+$hover-bg: #eff4ff;
+$is-disabled-bg: #f8f8f8;
+$input-label-color: #323233;
+$input-border-color: #c4cccc;
+$base-font-color: #313233;
+$primary-font-color: #4c84ff;
+$input-foucs-color: #26a5ff;
+$base-border-color: #fff;
+$sub-menu-color: #636466;
+$sidebar-bg: #fff;
+$sub-menu-hover-bg: #eff4ff;
+$sidebar-font-color: #313233;
+$sidebar-menu-active-color: #4c84ff;
+$app-title-color: #646466;
+$footer-font-color: #626f86;
+$table-tr-bg-color: #fff;
+$table-border-color: #d7e0e0;
+$danger-color: #ffd633;
+$info-color: #969799;
+$success-color: #2bd9a2;
+$error-color: #fe515c;
+$warning-color: #ffd633;
+$button-border-color: #e1e2e6;
+$button-primary-color: #4c84ff;
+$button-danger-color: #f6647f;
+$button-success-color: #15aeae;
+$input-border-color: #3b5673;
+$info-row-bg-color: #172d46;
+$body-bg-color: #f2f4f7;
+$color-646466:#646466;
+$color-646566:#646566;
+$color-323233:#323233;
+$color-969799:#969799;
+$color-29cb97:#29cb97;
+$color-969699:#969699;
+$color-939699:#939699;
+$color-333:#333;
+$color-999:#999;
+$color-666:#666;
+$table-color: #313233;
+$t-head-bg-color: #fff;
+$t-striped-bg-color: #f1f3f6;
+$hover-color: #3374ff;
+$dark_gray: #ccc;
+$tip-success: #2bd9a2;
+$tabs-active-color: #4c85ff;
+$emergency-color: #fe515c;
+$important-color: #febe06;
+$secondary-color: #313233;
+$empty-color: #727272;
+$alarmRule-bg: #f5f8ff;
+$color-323232:#323232;
+$template-bg: #fafbfd;
+$add-panel-bg: #f0f2f5;
+$select-panel-style: #8696a7;
+$preview-panel-bg: #f6f7f9;
+$warning-alert-bg-color: #fff4d4;
+
+// the:export directive is the magic sauce for webpack
+
+/* // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass */
+:export {
+	menuText: $menuText;
+	menuActiveText: $menuActiveText;
+	subMenuActiveText: $subMenuActiveText;
+	menuBg: $menuBg;
+	menuHover: $menuHover;
+	subMenuBg: $subMenuBg;
+	subMenuHover: $subMenuHover;
+	sideBarWidth: $sideBarWidth;
+	baseFontColor: $base-font-color;
+}

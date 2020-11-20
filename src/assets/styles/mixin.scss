@@ -1,0 +1,364 @@
+@charset "utf-8";
+@import './config.scss';
+@import './variables.scss';
+
+$lte7:true !default;
+//是否支持某个浏览器的前缀，如果你不想支持，可以设置为false
+//----------------------------
+$prefix-for-webkit: true !default;
+$prefix-for-mozilla: true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera: true !default;
+$prefix-for-spec: true !default; // 标准版
+
+
+// prefixer
+//----------------------------
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit and $prefix-for-webkit == true {
+      -webkit-#{$property}: $value;
+    }
+    @else if $prefix == moz and $prefix-for-mozilla == true {
+      -moz-#{$property}: $value;
+    }
+    @else if $prefix == ms and $prefix-for-microsoft == true {
+      -ms-#{$property}: $value;
+    }
+    @else if $prefix == o and $prefix-for-opera == true {
+      -o-#{$property}: $value;
+    }
+    @else if $prefix == spec and $prefix-for-spec == true {
+      #{$property}: $value;
+    }
+    @else {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+//是否兼容ie6, 7
+@mixin inline-block {
+  display: inline-block;
+
+  @if $lte7 {
+    *display: inline;
+    *zoom: 1;
+  }
+
+}
+
+@mixin center-block {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//...可以对box-shadow设置很多个值
+//webkit moz o ms 和标准
+@mixin box-shadow($shadow...) {
+  @include prefixer(box-shadow, $shadow, webkit moz o ms spec);
+}
+
+//webkit moz o ms 和标准
+@mixin box-sizing($type:border-box) {
+  // border-box | padding-box | content-box
+  @include prefixer(box-sizing, $type, webkit moz o ms spec);
+}
+
+//webkit moz o ms 和标准
+@mixin transform($property...) {
+  @include prefixer(transform, $property, webkit moz o ms spec);
+}
+
+//webkit moz o ms 和标准
+@mixin transition($property) {
+  @include prefixer(transition, $property, webkit moz o ms spec);
+}
+
+//webkit moz o ms 和标准
+@mixin text-overflow($property) {
+  @include prefixer(text-overflow, $property, webkit moz o ms spec);
+}
+
+//webkit moz o ms 和标准
+@mixin max-content($property) {
+  #{$property}: max-content;
+  #{$property}: -moz-max-content;
+  #{$property}: -webkit-max-content;
+  #{$property}: -o-max-content;
+  #{$property}: -ms-max-content;
+}
+
+@mixin calc($property, $expression) {
+  #{$property}: calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -o-calc(#{$expression});
+  #{$property}: -ms-calc(#{$expression});
+}
+
+//定义media-queries的最小最大宽度
+@mixin screen($res-min, $res-max) {
+  @media screen and (min-width:$res-min) and (max-width:$res-max) {
+    @content;
+  }
+
+}
+
+//定义IE10的 media
+@mixin screenIE() {
+  @media screen and(-ms-high-contrast:active), (-ms-high-contrast:none) {
+    @content;
+  }
+
+}
+
+// triangle
+@mixin triangle($direction, $size, $borderColor) {
+  content: "";
+  height: 0;
+  width: 0;
+
+  @if $direction == top {
+    border-bottom: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  }
+
+  @else if $direction == right {
+    border-left: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+
+  @else if $direction == bottom {
+    border-top: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  }
+
+  @else if $direction == left {
+    border-right: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+
+}
+
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin vertical-middle {
+  position: absolute;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+@mixin clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+@mixin scrollBar {
+  &:hover {
+    &::-webkit-scrollbar-track-piece {
+      background: #d3dce6;
+    }
+
+    &::-webkit-scrollbar {
+      width: vw(6);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: vw(20);
+    }
+
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: none;
+    border-radius: 0;
+  }
+}
+
+@mixin input-placeholder {
+  ::-webkit-input-placeholder {
+    font-size: vw(14);
+    color: $color-969799 !important;
+    font-family: Microsoft YaHei, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
+    font-weight: normal;
+  }
+
+  :-moz-placeholder {
+    font-size: vw(14);
+    color: $color-969799 !important;
+  }
+
+  ::-moz-placeholder {
+    font-size: vw(14);
+    color: $color-969799 !important;
+  }
+
+  :-ms-input-placeholder {
+    font-size: vw(14);
+    font-family: Microsoft YaHei, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
+    font-weight: normal;
+    color: $color-969799 !important;
+  }
+
+}
+
+// 单行span等文本溢出 ...显示
+@mixin text-overflow-hidden($max-width: 100%) {
+  @include inline-block;
+  @include text-overflow(ellipsis);
+  max-width: $max-width;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 
+*这里有几点需要再次提醒下：
+* 首先%定义的占位选择器样式不能传递参数。当然请注意不能传递参数，不代表样式里面不能使用变量。
+* 然后@extend调用%申明的东西时，必须要把%带上，@extend %clearfix正确，而@extend clearfix是错误的调用。
+* 最后%定义的样式，如果不调用是不会产生任何样式的，这也是用%定义样式比用原先的class方法定义样式高明的一方面。
+*/
+%display_flex {
+  display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */  
+  display: -moz-box; /* Firefox 17- */  
+  display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */  
+  display: -moz-flex; /* Firefox 18+ */  
+  display: -ms-flexbox; /* IE 10 */  
+  display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */ 
+}
+%display_flex > *{
+  display: block;
+}
+%display_inline-flex{
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;    
+}
+%display_inline-flex > *{
+  display: block;
+}
+/*伸缩流方向*/
+%flex-direction_column {
+  -webkit-box-orient: vertical;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+/*主轴对齐*/
+%justify-content_flex-start {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+%justify-content_flex-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center; // 导致IE10下 定宽的div水平不能居中
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+%justify-content_flex-end{
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+/*俩端对齐*/
+%justify-content_flex-justify {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+/*侧轴对齐*/
+%align-items_flex-start {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+%align-items_flex-end {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+%align-items_center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+%align-items_baseline {
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+}
+/*伸缩性*/
+%flex_auto {
+  -webkit-box-flex: 1;
+  -ms-flex: auto;
+  -webkit-flex: auto;
+  flex: auto;
+}
+%flex_1 {
+  width: 0;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;    
+}
+/*显示顺序*/
+%order_2 {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 2;
+  -webkit-order: 2;
+  order: 2;
+}
+%order_3 {
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 3;
+  -webkit-order: 3;
+  order: 3;
+}
+/*自定义按钮*/
+%customBtn {
+  cursor: pointer;
+  outline: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+/*去掉连续点击浏览器默认选中部分元素的效果*/
+%user-select-none {
+  outline: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}

@@ -1,0 +1,431 @@
+@import './mixin-ui.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './btn.scss';
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  // font-family: Microsoft YaHei, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  background: $body-bg-color;
+  font-size: vw(14);
+  @include screenIE {
+    font-family: Microsoft YaHei !important;
+  }
+}
+
+html {
+  box-sizing: border-box;
+  @include screenIE {
+    font-family: Microsoft YaHei !important;
+  }
+}
+
+img[alt] {
+  font-size: 0.75em;
+}
+li {
+  list-style-type: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+div:focus {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+a, a:focus, a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+select, a, button, input {
+  outline: none;
+}
+
+.auto_dialog {
+  @extend %display_flex;
+  @extend %align-items_center;
+  margin: 0 auto;
+  overflow: hidden;
+  .el-dialog {
+    margin: 0 auto !important;
+    overflow: hidden;
+    .el-dialog__header {
+      max-height: vw(50);
+    }
+    .el-dialog__body {
+      $dialog-body-max-height: vw(650);
+      @include calc(max-height, #{$dialog-body-max-height});
+      @include screen(780px, 1500px){
+        @include calc(max-height, 5.3rem);
+      }
+      padding: 0;
+      overflow: hidden;
+      overflow-y: auto;
+      .el-form {
+        padding: vw(20) vw(30) 0 0 !important;
+        .el-select,.el-input,.el-textarea,.textarea {
+          width: 100%;
+        }
+      }
+    }
+    .el-dialog__footer {
+      padding: vw(20) vw(40);
+      text-align: right;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      @extend %user-select-none;
+      .dialog-footer {
+        @extend %user-select-none;
+      }
+    }
+  }
+}
+
+//火狐下的移除
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+//谷歌下的移除
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+//main-container全局样式
+#app {
+  height: 100%;
+  @extend %el-textarea-count;
+  // 主体区域
+  .main-container {
+    min-height: 100%;
+    height: 100%;
+    transition: margin-left 0.28s;
+    margin-left: vw(220);
+    font-size: vw(14);
+
+    .containerTcloud {
+      min-height: vw(870);
+      @include calc(min-height, 100vh - #{$sub-gutter-height});
+      padding: vw(20);
+      background: $bg-color;
+    }
+
+  }
+
+  .app-container {
+    padding: 0;
+    margin: vw(70) vw(20) vw(20);
+    min-height: vw(870);
+    @include calc(min-height, 100vh - #{$sub-gutter-height});
+    font-size: vw(14);
+    .primaryPlain.el-button {
+      color: $button-primary-color;
+      border-color: $button-primary-color;
+    }
+
+    .base-page {
+      min-height: vw(870);
+      @include calc(min-height, 100vh - #{$sub-gutter-height});
+      background-color: $bg-color;
+    }
+
+    .sub-page {
+      min-height: vw(856);
+      @include calc(min-height, 100vh - #{$sub-gutter-height});
+      background-color: $bg-color;
+    }
+
+    .app_title {
+      margin: - vw(10) 0 vw(10);
+      font-size: vw(14);
+      color: $app-title-color;
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .link_title {
+      cursor: pointer;
+    }
+
+    .el-form {
+      padding: vw(30) vw(20);
+    }
+
+    .el-input, .el-textarea {
+      @include input-placeholder;
+    }
+
+    .textarea {
+      position: relative;
+      min-height: vw(128);
+      max-width: vw(400);
+      // margin-left: vw(5);
+
+      .el-textarea__inner {
+        line-height: 1.4;
+        padding: vw(10) vw(15) vw(30);
+        max-width: vw(400);
+        resize: none;
+        //禁止拉伸
+        @include scrollBar;
+      }
+
+      .length {
+        position: absolute;
+        right: vw(20);
+        bottom: vw(10);
+        bottom: vw(25)\9\0;
+        font-size: vw(12);
+        color: $color-969799;
+      }
+
+    }
+
+  }
+}
+.textCenter {
+  text-align: center !important;
+}
+
+.mce-branding a {
+  display: none !important;
+}
+
+::-ms-clear, ::-ms-reveal {
+  display: none;
+}
+
+.searchBox {
+  line-height: vw(45);
+  padding-bottom: vw(10);
+  @extend %display_flex;
+  @extend %align-items_center;
+  @extend %justify-content_flex-end;
+  @include screen(780px, 1440px) {
+    .el-input.el-input--medium, .el-input--medium .el-input__inner {
+      max-width: 160px !important;
+    }
+    .el-select {
+      .el-select--medium, .el-input.el-input--medium, .el-input--medium .el-input__inner {
+        max-width: 120px !important;
+      }
+
+    }
+    .el-range-editor--medium.el-input__inner {
+      max-width: 320px !important;
+    }
+    .el-range-editor--medium .el-range__icon, .el-range-editor--medium .el-range__close-icon {
+      line-height: vw(28);
+    }
+  }
+  .el-input__icon {
+    font-size: vw(18);
+    color: $color-646566 !important;
+  }
+  .el-input--medium {
+    width: 100%;
+    max-width: vw(230);
+  }
+  .el-select, .el-range-editor--medium.el-input__inner, .el-input--medium {
+    margin-left: vw(5);
+    vertical-align: middle;
+  }
+  label {
+    margin-left: vw(20);
+  }
+  .searchType {
+    margin-left: vw(10);
+    margin-right: vw(5);
+  }
+  .searchBox-left {
+    @extend %flex_auto;
+    text-align: left;
+  }
+  .searchBox-right {
+    @extend %flex_auto;
+    text-align: right;
+  }
+  .el-button {
+    margin-left: vw(10);
+  }
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+a, a:focus, a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inlineBlock {
+  display: block;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+
+}
+
+aside {
+  background: #eef1f6;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  display: block;
+  line-height: 32px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    color: #337ab7;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+
+  }
+
+}
+
+.components-container {
+  margin: 30px 50px;
+  position: relative;
+}
+
+.pagination-container {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center
+}
+
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+
+}
+
+.link-type, .link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+.switchTooltips {
+  width: 250px;
+  text-align: center;
+}
